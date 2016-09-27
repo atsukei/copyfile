@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace copyfile
 {
-    public partial class Form1 : Form
+    public partial class main_menu : Form
     {
-        public Form1()
+        public main_menu()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
