@@ -15,11 +15,13 @@ namespace copyfile
         public main_menu()
         {
             InitializeComponent();
+            FormLoad();
         }
-
-        private void label1_Click(object sender, EventArgs e)
+        private void FormLoad()
         {
+            FileControl inputbox_data = new FileControl();
 
+            input_box.Text = inputbox_data.SetDataPath();
         }
     }
 }

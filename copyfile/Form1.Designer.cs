@@ -39,18 +39,20 @@
             // 
             // input_box
             // 
-            this.input_box.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.input_box.Enabled = false;
+            this.input_box.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.input_box.Location = new System.Drawing.Point(13, 64);
             this.input_box.Name = "input_box";
-            this.input_box.Size = new System.Drawing.Size(752, 39);
+            this.input_box.ReadOnly = true;
+            this.input_box.Size = new System.Drawing.Size(752, 29);
             this.input_box.TabIndex = 0;
             // 
             // output_box
             // 
-            this.output_box.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.output_box.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.output_box.Location = new System.Drawing.Point(13, 190);
             this.output_box.Name = "output_box";
-            this.output_box.Size = new System.Drawing.Size(752, 39);
+            this.output_box.Size = new System.Drawing.Size(752, 29);
             this.output_box.TabIndex = 1;
             // 
             // input_label
@@ -63,7 +65,6 @@
             this.input_label.Size = new System.Drawing.Size(384, 43);
             this.input_label.TabIndex = 2;
             this.input_label.Text = "ONBUData(基データ)";
-            this.input_label.Click += new System.EventHandler(this.label1_Click);
             // 
             // output_label
             // 
