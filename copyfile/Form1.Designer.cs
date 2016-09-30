@@ -62,9 +62,9 @@
             this.input_label.ForeColor = System.Drawing.SystemColors.InfoText;
             this.input_label.Location = new System.Drawing.Point(12, 18);
             this.input_label.Name = "input_label";
-            this.input_label.Size = new System.Drawing.Size(384, 43);
+            this.input_label.Size = new System.Drawing.Size(162, 43);
             this.input_label.TabIndex = 2;
-            this.input_label.Text = "ONBUData(基データ)";
+            this.input_label.Text = "基データ";
             // 
             // output_label
             // 
