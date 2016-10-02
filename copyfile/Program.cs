@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.IO.Directory;
+using static System.IO.File;
 
 namespace copyfile
 {
@@ -21,9 +22,9 @@ namespace copyfile
         }
     }
     /* ==============================================================
-     * 入力ファイルの操作に関するクラス
-     * =============================================================*/
-     class FileControl
+    /  入力ファイルの操作に関するクラス
+    /  =============================================================*/
+     class InputFileControl
     {
         private string input_data_path;
         
@@ -46,6 +47,39 @@ namespace copyfile
             }
 
             return input_data_path;
+        }
+    }
+
+    /* ==============================================================
+    /  出力ファイルの操作に関するクラス
+    /  =============================================================*/
+    class OutputFileControl
+    {
+        private string output_data_path;
+
+        // 出力先のカレントディレクトリがあるか診断を行うクラス
+        // 戻り値：(出力先フォルダが正しいとき)主力先フォルダのパス
+        //         (それ以外)各出力に応じたエラーメッセージ
+    }
+    /* ==============================================================
+    /  ファイルのコピーを行うクラス
+    /  =============================================================*/
+    class FileCopyControl
+    {
+        private string input_data_path;
+        private string output_data_path;
+
+        // ファイル名を代入する
+        public void SetFileName(string in_path,string out_path)
+        {
+            input_data_path = in_path;
+            output_data_path = out_path;
+        }
+        // ファイルのコピーを開始する
+        public void FileCopyStart()
+        {
+            //フォルダのコピーを行う必要がある
+            Copy(input_data_path, output_data_path);
         }
     }
 }
