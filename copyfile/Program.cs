@@ -62,24 +62,43 @@ namespace copyfile
         //         (それ以外)各出力に応じたエラーメッセージ
     }
     /* ==============================================================
-    /  ファイルのコピーを行うクラス
+    /  フォルダのコントロールを行うクラス
     /  =============================================================*/
     class FileCopyControl
     {
-        private string input_data_path;
-        private string output_data_path;
+        /// <summary>
+        /// フォルダをコピーする
+        /// </summary>
+        /// <param name="input_data_path">コピーするディレクトリ</param>
+        /// <param name="output_data_path">コピー先のディレクトリ</param> 
+        public void CopyFolder(string input_data_path, string output_data_path)
+        {
+            // コピー先のフォルダがない場合は作る
+            if (!System.IO.Directory.Exists(output_data_path))
+            {
+                System.IO.Directory.CreateDirectory(output_data_path);
+                // 属性もコピー
+                System.IO.File.SetAttributes(output_data_path,
+                    System.IO.File.GetAttributes(input_data_path));
+            }
 
-        // ファイル名を代入する
-        public void SetFileName(string in_path,string out_path)
-        {
-            input_data_path = in_path;
-            output_data_path = out_path;
-        }
-        // ファイルのコピーを開始する
-        public void FileCopyStart()
-        {
-            //フォルダのコピーを行う必要がある
-            Copy(input_data_path, output_data_path);
+            // コピー先のフォルダ名の末尾に\を付ける
+            if (output_data_path[output_data_path.Length - 1] != System.IO.Path.DirectorySeparatorChar)
+            {
+                output_data_path = output_data_path + System.IO.Path.DirectorySeparatorChar;
+            }
+            // コピー元のフォルダにあるファイルをコピー
+            string[] files = System.IO.Directory.GetFiles(input_data_path);
+            foreach (string file in files)
+            {
+                System.IO.File.Copy(file, output_data_path + System.IO.Path.GetFileName(file), true);
+            }
+            //コピー元のフォルダにあるフォルダについて再帰的に呼び出す。
+            string[] folders = System.IO.Directory.GetDirectories(input_data_path);
+            foreach (string folder in folders)
+            {
+                CopyFolder(folder, output_data_path + System.IO.Path.GetFileName(folder));
+            }
         }
     }
 }
