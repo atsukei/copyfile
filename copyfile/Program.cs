@@ -57,9 +57,26 @@ namespace copyfile
     {
         private string output_data_path;
 
+        //\dataを追記して値を返す
+        // 戻り値：out_data + "\data"
+        private string GetDataPath(string out_data)
+        {
+            return out_data + "\\data";
+        }
         // 出力先のカレントディレクトリがあるか診断を行うクラス
         // 戻り値：(出力先フォルダが正しいとき)主力先フォルダのパス
         //         (それ以外)各出力に応じたエラーメッセージ
+        public string SetDataPath(string out_data)
+        {
+            output_data_path = GetDataPath(out_data);
+
+            if (!(System.IO.Directory.Exists(out_data)) || output_data_path == "\\data")
+            {
+                output_data_path = null;
+            }
+
+            return output_data_path;
+        }
     }
     /* ==============================================================
     /  フォルダのコントロールを行うクラス
@@ -67,11 +84,41 @@ namespace copyfile
     class FileCopyControl
     {
         /// <summary>
+        /// ファルダコピーを開始する、例外処理などのエラー判定も行う
+        /// </summary>
+        /// <param name="input_data_path">コピーするディレクトリ</param>
+        /// <param name="output_data_path">コピー先のディレクトリ</param> 
+        public void FolderCopyStart(string input_data_path, string output_data_path)
+        {
+            if(output_data_path == null){
+                //メッセージボックスを表示する
+                ViewError("出力先のフォルダに存在しないフォルダが選択されています。");
+            } else {
+                CopyFolder(input_data_path, output_data_path);
+                ViewMessage("完了");
+            }
+        }
+        // エラーメッセージを表示する
+        private void ViewError(string str)
+        {
+            MessageBox.Show(str,
+                    "エラー",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+        // 完了メッセージを表示する
+        private void ViewMessage(string str)
+        {
+            MessageBox.Show(str,
+                    "完了",
+                    MessageBoxButtons.OK);
+        }
+        /// <summary>
         /// フォルダをコピーする
         /// </summary>
         /// <param name="input_data_path">コピーするディレクトリ</param>
         /// <param name="output_data_path">コピー先のディレクトリ</param> 
-        public void CopyFolder(string input_data_path, string output_data_path)
+        private void CopyFolder(string input_data_path, string output_data_path)
         {
             // コピー先のフォルダがない場合は作る
             if (!System.IO.Directory.Exists(output_data_path))
